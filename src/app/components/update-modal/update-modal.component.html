@@ -1,0 +1,13 @@
+<h1 mat-dialog-title class="text-center">Edit Todo</h1>
+<div mat-dialog-content>
+  <form class="d-flex flex-column gap-3">
+    <mat-form-field appearance="fill" class="w-100">
+      <mat-label>Title</mat-label>
+      <input matInput [(ngModel)]="data.title" name="title" placeholder="Edit todo title">
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions class="d-flex justify-content-between">
+  <button mat-button class="btn btn-outline-secondary" (click)="onCancel()">Cancel</button>
+  <button mat-raised-button color="primary" class="btn btn-primary" (click)="onSave()">Save</button>
+</div>

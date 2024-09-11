@@ -1,0 +1,58 @@
+<h1 class="text-center my-4">My Todos</h1>
+<div class="button-container">
+  <button mat-raised-button color="warn" (click)="logout()">Logout</button>
+  <button mat-raised-button color="primary" (click)="openAddTodoDialog()">Add Todo</button>
+</div>
+
+<div class="table-responsive">
+  <table mat-table [dataSource]="todos" class="mat-elevation-z8 table table-striped table-hover table-bordered">
+    <!-- Status Column -->
+    <ng-container matColumnDef="Status">
+      <th mat-header-cell *matHeaderCellDef class="mat-header-cell"> Status </th>
+      <td mat-cell *matCellDef="let todo">
+        <mat-checkbox [(ngModel)]="todo.completed" (change)="updateTodo(todo)"></mat-checkbox>
+      </td>
+    </ng-container>
+
+    <!-- ID Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef class="mat-header-cell"> ID </th>
+      <td mat-cell *matCellDef="let todo"> {{todo.id}} </td>
+    </ng-container>
+
+    <!-- Title Column -->
+    <ng-container matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef class="mat-header-cell"> Title </th>
+      <td mat-cell *matCellDef="let todo"> {{todo.title}} </td>
+    </ng-container>
+
+    <!-- Completed Column -->
+    <ng-container matColumnDef="completed">
+      <th mat-header-cell *matHeaderCellDef class="mat-header-cell"> Completed </th>
+      <td mat-cell *matCellDef="let todo"> {{todo.completed}} </td>
+    </ng-container>
+
+    <!-- Created At Column -->
+    <ng-container matColumnDef="createdAt">
+      <th mat-header-cell *matHeaderCellDef class="mat-header-cell"> Created At </th>
+      <td mat-cell *matCellDef="let element"> {{element.createdAt | date}} </td>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef class="mat-header-cell"> Actions </th>
+      <td mat-cell *matCellDef="let todo">
+        <button mat-icon-button color="primary" (click)="openUpdateTodoDialog(todo)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="deleteTodo(todo.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <!-- Table Header and Row Definitions -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns" class="mat-header-row"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="mat-row"></tr>
+  </table>
+</div>
